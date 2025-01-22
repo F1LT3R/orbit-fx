@@ -1,4 +1,6 @@
-# OrbitFX
+<center><img src="./public/img/orbit-fx-logo-transparent.png" /></center>
+
+# Orbit-FX
 
 A quick code example to demonstrate how to write a DOM element animator, to create beautiful, interactive animations with JavaScript and CSS.
 
