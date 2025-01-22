@@ -1,12 +1,17 @@
 import Track from './Track.mjs'
 
 export default class Actor {
-    constructor(name, objRef, parent) {
+    constructor(name, objectReference, updateCallback, parent) {
         this.name = name
-        this.objRef = objRef
+        this.objectReference = objectReference
+        this.updateCallback = updateCallback
         this.parent = parent
         this.tracks = {}
         return this
+    }
+
+    update() {
+        this.objectReference.update(this.tracks)
     }
 
     track(prop) {

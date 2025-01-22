@@ -16,23 +16,23 @@ export default class Key {
         return this
     }
 
-    actor(name, objRef) {
-        var timeline = this.parent.parent.parent
-        return timeline.actors.call(timeline, name, objRef)
+    actor(name, objectReference) {
+        const timeline = this.parent.parent.parent
+        return timeline.actors.call(timeline, name, objectReference)
     }
 
-    track(name, objRef, prop) {
-        var actor = this.parent.parent
-        return actor.track.call(actor, name, objRef, prop)
+    track(name, objectReference, prop) {
+        const actor = this.parent.parent
+        return actor.track.call(actor, name, objectReference, prop)
     }
 
     key(frame, value, ease, callback) {
-        var track = this.parent
+        const track = this.parent
         return track.key.call(track, frame, value, ease, callback)
     }
 
     always(func) {
-        var track = this.parent
+        const track = this.parent
         return track.always.call(track, func)
     }
 }

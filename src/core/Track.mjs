@@ -36,7 +36,7 @@ export default class Track {
             keyIndex.sort(sortNumber)
 
             for (let i = 0; i < this.keys.length; i += 1) {
-                for (var j = 0; j < this.keys.length; j += 1) {
+                for (let j = 0; j < this.keys.length; j += 1) {
                     if (keyIndex[i] == this.keys[j].frame) {
                         keyStack[i] = this.keys[j]
                     }
@@ -77,10 +77,10 @@ export default class Track {
                             nextKey.frame - curKey.frame,
                         )
 
-                        this.parent.objRef[this.prop][indice] = val
+                        this.parent.objectReference[this.prop][indice] = val
                     }
                 } else if (curKey.isString) {
-                    this.parent.objRef[this.prop] = curKey.value
+                    this.parent.objectReference[this.prop] = curKey.value
                 } else {
                     const val = this.ease[curKey.ease](
                         0,
@@ -90,7 +90,7 @@ export default class Track {
                         nextKey.frame - curKey.frame,
                     )
 
-                    this.parent.objRef[this.prop] = val
+                    this.parent.objectReference[this.prop] = val
                 }
 
                 if (this.lastKeyFired && this.lastKeyFired.frame != curKey.frame) {
@@ -98,7 +98,7 @@ export default class Track {
                 }
 
                 if (curKey.callback && !curKey.callbackFired) {
-                    curKey.callback.call(this.parent.objRef, {
+                    curKey.callback.call(this.parent.objectReference, {
                         frame: frame,
                         prop: this.prop,
                         orbitTrack: this,
@@ -111,17 +111,17 @@ export default class Track {
                 if (curKey.isArray) {
                     const aryLen = curKey.aryLen
 
-                    for (indice = 0; indice < aryLen; indice++) {
-                        this.parent.objRef[this.prop][indice] = curKey.value[indice]
+                    for (indice = 0; indice < aryLen; indice += 1) {
+                        this.parent.objectReference[this.prop][indice] = curKey.value[indice]
                     }
                 } else if (typeof indice === 'number') {
-                    this.parent.objRef[this.prop][indice] = curKey.value
+                    this.parent.objectReference[this.prop][indice] = curKey.value
                 }
             }
         }
 
         if (this.alwaysCallback) {
-            this.alwaysCallback.call(this.parent.objRef, {
+            this.alwaysCallback.call(this.parent.objectReference, {
                 frame: frame,
                 prop: this.prop,
                 orbitTrack: this,
@@ -134,8 +134,8 @@ export default class Track {
         return this
     }
 
-    actor(name, objRef) {
-        var timeline = this.parent.parent
-        return timeline.obj.call(timeline, name, objRef)
+    actor(name, objectReference) {
+        const timeline = this.parent.parent
+        return timeline.obj.call(timeline, name, objectReference)
     }
 }

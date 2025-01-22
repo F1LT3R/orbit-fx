@@ -11,7 +11,7 @@ export default class Timeline {
         this.callback = callback
         this.parent = parent
         this.actors = {}
-        parent.timelineCount++
+        parent.timelineCount += 1
         return this
     }
 
@@ -65,9 +65,12 @@ export default class Timeline {
         let thisActor
         for (var i in this.actors) {
             thisActor = this.actors[i]
+
             for (var j in thisActor.tracks) {
                 thisActor.tracks[j].play(this.frame)
             }
+
+            thisActor.update()
         }
 
         if (this.always) {
