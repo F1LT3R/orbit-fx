@@ -1,0 +1,11 @@
+{
+    "extends": ["xo"],
+    "plugins": ["unicorn"],
+    "prettier": true,
+    "rules": {
+        "unicorn/prefer-array-flat": "error",
+        "unicorn/no-array-reduce": "off",
+        "indent": ["error", "tab"], // Enforce tab-based indentation
+        "no-mixed-spaces-and-tabs": ["error"] // Prevent mixed spaces and tabs
+    }
+}

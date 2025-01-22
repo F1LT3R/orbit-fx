@@ -43,39 +43,39 @@ frame((boxes) => {
 
 
 
-let t = 0
+// let t = 0
 
-const backward = () => {
-    const timer2 = window.setInterval(() => {
-        t -= rate
+// const backward = () => {
+//     const timer2 = window.setInterval(() => {
+//         t -= rate
     
-        if (t < 1) {
-            window.clearInterval(timer2)
-        }
+//         if (t < 1) {
+//             window.clearInterval(timer2)
+//         }
         
-        boxes.forEach(box => {
-            transform(box, t)
-            style(box)
-        })
-    }, ms)
-}
+//         boxes.forEach(box => {
+//             transform(box, t)
+//             style(box)
+//         })
+//     }, ms)
+// }
 
-const forward = () => {
-    const timer1 = window.setInterval(() => {
-        t += rate
+// const forward = () => {
+//     const timer1 = window.setInterval(() => {
+//         t += rate
 
-        if (t > 100) {
-            window.clearInterval(timer1)
-            backward()
-        }
+//         if (t > 100) {
+//             window.clearInterval(timer1)
+//             backward()
+//         }
         
-        boxes.forEach(box => {
-            transform(box, t)
-            style(box)
-        })
-    }, ms)
-}
+//         boxes.forEach(box => {
+//             transform(box, t)
+//             style(box)
+//         })
+//     }, ms)
+// }
 
-forward()   
+// forward()   
 
 

@@ -6,6 +6,21 @@
 
 body {
     font-family: Arial, sans-serif;
+    background-color: #EEEEEE;
+    background-image: 
+        /* url('img/contour-background.webp'), */
+        linear-gradient(180deg, rgba(232, 232, 232, 0.75), rgba(255, 255, 255, 0.75));
+    background-repeat: repeat;
+    background-size: auto;
+    height: 100vh;
+}
+
+
+#contours {
+    top: 0;
+    position: absolute;
+    display: block;
+    opacity: 0.5;
 }
 
 header {
@@ -14,12 +29,12 @@ header {
     left: 0;
     width: 100%;
     height: 60px;
-    background-color: #333;
+    background-color: rgba(0, 25, 60, 0.9);
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0px 50px 50px rgba(255, 150, 0, 0.4); */
     z-index: 1000;
 }
 
@@ -37,16 +52,19 @@ main {
 }
 
 .box {
+    /* border:1px solid rgba(255, 255, 255, 0.5); */
+    /* background-color: rgba(255, 255, 255, 0.75); */
+    background-color: rgba(128, 128, 128, 0.75);
     transform-origin: 50% 50% 0;
     transform-style: preserve-3d;
     height: 100px;
-    background-color: #007bff;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 10px;
     border-radius: 4px;
+    /* box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.0125); */
 }
 
 .box:last-child {
@@ -64,3 +82,4 @@ main {
 .small {
     flex: 1 1 calc(20% - 10px); /* 5 boxes per row */
 }
+

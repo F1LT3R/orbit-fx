@@ -1,0 +1,15 @@
+{
+    "extends": "xo",
+    "plugins": ["unicorn"],
+    "rules": {
+        "indent": ["error", "tab"],
+        "unicorn/prefer-module": "error",
+        "unicorn/prevent-abbreviations": "off",
+        "unicorn/filename-case": [
+            "error",
+            {
+                "case": "camelCase"
+            }
+        ]
+    }
+}
