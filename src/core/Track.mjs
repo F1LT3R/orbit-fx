@@ -16,74 +16,80 @@ export default class Track {
     }
 
     key(frame, value, ease, callback) {
-        for (var i = 0, l = this.keys.length; i < l; i++) {
+        for (let i = 0, l = this.keys.length; i < l; i += 1) {
             if (this.keys[i].frame === frame) {
                 return this.keys[i]
             }
         }
 
         if (arguments.length > 1) {
-            var keyIndex = [],
-                keyStack = [],
-                thisKey = (this.keys[this.keys.length] = new Key(
-                    frame,
-                    value,
-                    ease,
-                    callback,
-                    this,
-                ))
-            for (i = 0; i < this.keys.length; i++) {
+            const keyIndex = []
+            const keyStack = []
+
+            const keyCount = this.keys.length
+            const thisKey = (this.keys[keyCount] = new Key(frame, value, ease, callback, this))
+
+            for (let i = 0; i < this.keys.length; i += 1) {
                 keyIndex[i] = this.keys[i].frame
             }
+
             keyIndex.sort(sortNumber)
-            for (i = 0; i < this.keys.length; i++) {
-                for (var j = 0; j < this.keys.length; j++) {
+
+            for (let i = 0; i < this.keys.length; i += 1) {
+                for (var j = 0; j < this.keys.length; j += 1) {
                     if (keyIndex[i] == this.keys[j].frame) {
                         keyStack[i] = this.keys[j]
                     }
                 }
             }
+
             this.keys = []
-            for (i = 0, l = keyStack.length; i < l; i++) {
+
+            for (let i = 0, l = keyStack.length; i < l; i += 1) {
                 this.keys[i] = keyStack[i]
             }
+
             return thisKey
-        } else {
-            return false
         }
+
+        return false
     }
 
     play(frame) {
-        var curKey, nextKey, val, indice, aryLen
-        for (var i = 0, l = this.keys.length; i < l; i++) {
-            curKey = this.keys[i]
-            nextKey = this.keys[i + 1]
+        for (let i = 0, l = this.keys.length; i < l; i += 1) {
+            const curKey = this.keys[i]
+            let nextKey = this.keys[i + 1]
+
             if (nextKey === undefined && i + 1 > l - 1) {
                 nextKey = this.keys[l - 1]
             }
+
             if (frame >= curKey.frame && frame < nextKey.frame) {
                 if (curKey.isArray) {
-                    aryLen = curKey.aryLen
-                    for (indice = 0; indice < aryLen; indice++) {
-                        val = this.ease[curKey.ease](
+                    const aryLen = curKey.aryLen
+
+                    for (indice = 0; indice < aryLen; indice += 1) {
+                        const val = this.ease[curKey.ease](
                             0,
                             frame - curKey.frame,
                             curKey.value[indice],
                             nextKey.value[indice] - curKey.value[indice],
                             nextKey.frame - curKey.frame,
                         )
+
                         this.parent.objRef[this.prop][indice] = val
                     }
                 } else if (curKey.isString) {
                     this.parent.objRef[this.prop] = curKey.value
                 } else {
-                    val = this.ease[curKey.ease](
+                    const val = this.ease[curKey.ease](
                         0,
                         frame - curKey.frame,
                         curKey.value,
                         nextKey.value - curKey.value,
                         nextKey.frame - curKey.frame,
                     )
+
                     this.parent.objRef[this.prop] = val
                 }
 
@@ -95,14 +101,16 @@ export default class Track {
                     curKey.callback.call(this.parent.objRef, {
                         frame: frame,
                         prop: this.prop,
-                        burstTrack: this,
+                        orbitTrack: this,
                     })
+
                     curKey.callbackFired = true
                     this.lastKeyFired = curKey
                 }
             } else if (frame >= nextKey.frame || frame === 0) {
                 if (curKey.isArray) {
-                    aryLen = curKey.aryLen
+                    const aryLen = curKey.aryLen
+
                     for (indice = 0; indice < aryLen; indice++) {
                         this.parent.objRef[this.prop][indice] = curKey.value[indice]
                     }
@@ -111,11 +119,12 @@ export default class Track {
                 }
             }
         }
+
         if (this.alwaysCallback) {
             this.alwaysCallback.call(this.parent.objRef, {
                 frame: frame,
                 prop: this.prop,
-                burstTrack: this,
+                orbitTrack: this,
             })
         }
     }
