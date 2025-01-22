@@ -1,4 +1,4 @@
-<center><img src="./public/img/orbit-fx-logo-transparent.png" /></center>
+<center><img width="320px" src="./public/img/orbit-fx-logo-transparent.png" /></center>
 
 # Orbit-FX
 
