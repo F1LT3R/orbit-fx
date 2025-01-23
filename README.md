@@ -17,10 +17,39 @@ npm start
 
 ## Animation
 
-### Arguments
+## Easing
 
-#### `repeat`
+Types of Easing
 
-- `bounce`
-- `forward`
-- `backward`
+- `step`
+- `linear`
+- `inOutQuad`
+- `inQuad`
+- `outQuad`
+- `inCubic`
+- `outCubic`
+- `inOutCubic`
+- `inQuart`
+- `outQuart`
+- `inOutQuart`
+- `inQuint`
+- `outQuint`
+- `inOutQuint`
+- `inSine`
+- `outSine`
+- `inOutSine`
+- `inExpo`
+- `outExpo`
+- `inOutExpo`
+- `inCirc`
+- `outCirc`
+- `inOutCirc`
+- `inElastic`
+- `outElastic`
+- `inOutElastic`
+- `inBack`
+- `outBack`
+- `inOutBack`
+- `inBounce`
+- `outBounce`
+- `inOutBounce`

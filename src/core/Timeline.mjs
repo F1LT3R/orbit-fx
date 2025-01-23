@@ -48,7 +48,7 @@ export default class Timeline {
                 //this.parent.unload(this.name);
 
                 if (this.callback) {
-                    this.callback(this.frame)
+                    this.callback(this)
                 }
             }
 
@@ -57,7 +57,7 @@ export default class Timeline {
                 //this.parent.unload(this.name);
 
                 if (this.callback) {
-                    this.callback(this.frame)
+                    this.callback(this)
                 }
             }
         }
