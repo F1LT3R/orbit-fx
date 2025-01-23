@@ -25,7 +25,6 @@ export default function ($element) {
                 const unitName = property.slice(0, 5)
                 const unit = units[unitName]
                 const value = this[property]
-
                 transform += `${property}(${value}${unit}) `
             }
 
