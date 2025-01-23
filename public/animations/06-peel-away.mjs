@@ -7,7 +7,7 @@ let speed = 1
 const easing = 'linear'
 
 const animation = new Animation(60)
-const timeline = animation.timeline('anim1', 0, 200, speed, false, (timeline) => {
+const timeline = animation.timeline('anim1', 0, 150, speed, false, (timeline) => {
     timeline.pauseAtFrame(0)
 })
 
@@ -23,9 +23,11 @@ $boxes.forEach(($box, index) => {
     /* prettier-ignore */
     timeline.actor(`box-${index}`, css3D($box))
 		.track('translateX')
+			.key(0, 0)
 			.key(startFrame, 0, 'inExpo')
-			.key(100, 2000)
+			.key(100, window.innerWidth + 800)
 		.track('rotateY')
+			.key(0, 0)
 			.key(startFrame, 0, easing)
 			.key(100, 90)
 			.key(150, 180)
