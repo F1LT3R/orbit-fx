@@ -8,6 +8,7 @@ export default class Timeline {
         this.end = end
         this.speed = speed
         this.loop = loop
+        this.pause = false
         this.callback = callback
         this.parent = parent
         this.actors = {}
@@ -27,7 +28,25 @@ export default class Timeline {
         return newActor
     }
 
+    pauseAtFrame(frame) {
+        this.paused = true
+
+        for (var i in this.actors) {
+            let actor = this.actors[i]
+
+            for (var j in actor.tracks) {
+                actor.tracks[j].play(frame)
+            }
+
+            actor.update()
+        }
+    }
+
     play(frame) {
+        if (this.paused) {
+            return
+        }
+
         this.frame = frame || (this.frame += this.speed)
 
         const looping = this.loop
@@ -50,9 +69,7 @@ export default class Timeline {
                 if (this.callback) {
                     this.callback(this)
                 }
-            }
-
-            if (this.frame <= this.start) {
+            } else if (this.frame <= this.start) {
                 this.frame = this.start
                 //this.parent.unload(this.name);
 

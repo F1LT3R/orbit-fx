@@ -67,7 +67,7 @@ main {
     margin-right: 10px;
     border-radius: 4px;
     cursor: pointer;
-    /* box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.0125); */
+    padding: 16px;
 }
 
 .box:last-child {

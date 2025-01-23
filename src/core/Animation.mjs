@@ -63,7 +63,8 @@ export default class Animation {
 
         for (const i in this.loaded) {
             if (this.hasOwnProperty('loaded')) {
-                this.loaded[i][1].play(frame)
+                const timeline = this.loaded[i][1]
+                timeline.play(frame)
             }
         }
     }

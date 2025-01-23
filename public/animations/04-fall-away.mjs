@@ -3,34 +3,32 @@ import Animation, { css3D } from '/vendor/orbit-fx/main.mjs'
 const $boxes = document.querySelectorAll('.box')
 
 let speed = 2
-const easing = 'outExpo'
+const easing = 'outQuad'
 
 const animation = new Animation(60)
-const timeline = animation.timeline('anim1', 0, 100, speed, false, (timeline) => {
-    timeline.speed = -speed
+const timeline = animation.timeline('anim1', 0, 150, speed, false, (timeline) => {
+    timeline.pauseAtFrame(0)
 })
 
-const rnd = () => -11.125 + Math.floor(Math.random() * 22.25)
+const rndPos = () => window.innerHeight + Math.random() * 500
+const rndStart = () => 1 + Math.floor(Math.random() * 50)
 
 $boxes.forEach(($box, index) => {
+    const endPosition = rndPos()
+
     /* prettier-ignore */
     timeline.actor(`box-${index}`, css3D($box))
-		.track('rotateX')
-			.key(0, 0, easing)
-			.key(100, rnd())
-		.track('rotateY')
-			.key(0, 0, easing)
-			.key(100, rnd())
-		.track('rotateZ')
-			.key(0, 0, easing)
-			.key(100, rnd())
+		.track('translateY')
+			.key(0, 0, 'step')
+			.key(rndStart(), 0, easing)
+			.key(100, endPosition)
 })
 
 animation.load('anim1')
 
 export const play = () => {
-    timeline.speed = speed
     timeline.frame = 0
+    timeline.paused = false
     animation.play()
 }
 
