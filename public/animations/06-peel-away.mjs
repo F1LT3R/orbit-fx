@@ -1,27 +1,34 @@
 import Animation, { css3D } from '/vendor/orbit-fx/main.mjs'
+import center from '/helpers/center.mjs'
 
 const $boxes = document.querySelectorAll('.box')
 
 let speed = 1
+const easing = 'linear'
 
 const animation = new Animation(60)
 const timeline = animation.timeline('anim1', 0, 200, speed, false, (timeline) => {
-    // timeline.pauseAtFrame(200)
+    timeline.pauseAtFrame(0)
 })
 
-const rndPos = () => 500 + Math.random() * 3000
+const startOffset = ($box) => {
+    const x = center($box).x
+    const frameOffset = 100 * (x / window.innerWidth)
+    return frameOffset
+}
 
 $boxes.forEach(($box, index) => {
-    const startPosition = rndPos()
+    const startFrame = startOffset($box)
 
     /* prettier-ignore */
     timeline.actor(`box-${index}`, css3D($box))
-		.track('opacity')
-			.key(0, 0, easing)
-			.key(100, 1)
-		.track('translateZ')
-			.key(0, startPosition, easing)
-			.key(100, 0)
+		.track('translateX')
+			.key(startFrame, 0, 'inExpo')
+			.key(100, 2000)
+		.track('rotateY')
+			.key(startFrame, 0, easing)
+			.key(100, 90)
+			.key(150, 180)
 })
 
 animation.load('anim1')

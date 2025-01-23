@@ -6,7 +6,7 @@ let speed = 2
 const easing = 'inOutQuad'
 
 const animation = new Animation(60)
-const timeline = animation.timeline('anim1', 0, 150, speed, false, (timeline) => {
+const timeline = animation.timeline('anim1', 0, 200, speed, false, (timeline) => {
     timeline.pauseAtFrame(0)
 })
 
