@@ -16,8 +16,6 @@ const transforms = [
     'scaleZ',
 ]
 
-const properties = ['opacity']
-
 const transform = (tracks, obj) => {
     let transform = ''
 
@@ -34,12 +32,22 @@ const transform = (tracks, obj) => {
     obj.$element.style.transform = transform
 }
 
+const properties = ['opacity', 'backgroundColor']
+const arrayLike = ['backgroundColor']
+
 const property = (tracks, obj) => {
     for (let property in tracks) {
         if (!properties.includes(property)) {
             continue
         }
+
         const value = obj[property]
+
+        if (arrayLike.includes(property)) {
+            obj.$element.style[property] = `rgba(${value.join(',')})`
+            continue
+        }
+
         obj.$element.style[property] = value
     }
 }
@@ -59,6 +67,7 @@ export default function ($element) {
         scaleZ: 0,
 
         opacity: 1,
+        backgroundColor: [128, 128, 128, 0.75],
 
         update(tracks) {
             transform(tracks, this)

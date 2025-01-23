@@ -68,7 +68,7 @@ export default class Track {
                 if (curKey.isArray) {
                     const aryLen = curKey.aryLen
 
-                    for (indice = 0; indice < aryLen; indice += 1) {
+                    for (let indice = 0; indice < aryLen; indice += 1) {
                         const val = this.ease[curKey.ease](
                             0,
                             frame - curKey.frame,
@@ -111,7 +111,7 @@ export default class Track {
                 if (curKey.isArray) {
                     const aryLen = curKey.aryLen
 
-                    for (indice = 0; indice < aryLen; indice += 1) {
+                    for (let indice = 0; indice < aryLen; indice += 1) {
                         this.parent.objectReference[this.prop][indice] = curKey.value[indice]
                     }
                 } else if (typeof indice === 'number') {
