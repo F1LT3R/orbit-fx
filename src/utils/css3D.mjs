@@ -1,7 +1,47 @@
-const units = {
+const transformUnits = {
     rotat: 'deg',
     trans: 'px',
     scale: '',
+}
+
+const transforms = [
+    'rotateX',
+    'rotateY',
+    'rotateZ',
+    'translateX',
+    'translateY',
+    'translateZ',
+    'scaleX',
+    'scaleY',
+    'scaleZ',
+]
+
+const properties = ['opacity']
+
+const transform = (tracks, obj) => {
+    let transform = ''
+
+    for (let property in tracks) {
+        if (!transforms.includes(property)) {
+            continue
+        }
+        const unitName = property.slice(0, 5)
+        const unit = transformUnits[unitName]
+        const value = obj[property]
+        transform += `${property}(${value}${unit}) `
+    }
+
+    obj.$element.style.transform = transform
+}
+
+const property = (tracks, obj) => {
+    for (let property in tracks) {
+        if (!properties.includes(property)) {
+            continue
+        }
+        const value = obj[property]
+        obj.$element.style[property] = value
+    }
 }
 
 export default function ($element) {
@@ -18,17 +58,11 @@ export default function ($element) {
         scaleY: 0,
         scaleZ: 0,
 
+        opacity: 1,
+
         update(tracks) {
-            let transform = ''
-
-            for (let property in tracks) {
-                const unitName = property.slice(0, 5)
-                const unit = units[unitName]
-                const value = this[property]
-                transform += `${property}(${value}${unit}) `
-            }
-
-            this.$element.style.transform = transform
+            transform(tracks, this)
+            property(tracks, this)
         },
     }
 }

@@ -15,6 +15,8 @@ const rndDeg = () => -22.25 + Math.floor(Math.random() * 45)
 const rndScale = () => 1 + (-1 + Math.random() * 2)
 
 $boxes.forEach(($box, index) => {
+    const scale = rndScale()
+
     /* prettier-ignore */
     timeline.actor(`box-${index}`, css3D($box))
 
@@ -30,13 +32,13 @@ $boxes.forEach(($box, index) => {
 
 		.track('scaleX')
 			.key(0, 1, easingScale)
-			.key(100, rndScale())
+			.key(100, scale)
 		.track('scaleY')
 			.key(0, 1, easingScale)
-			.key(100, rndScale())
+			.key(100, scale)
 		.track('scaleZ')
 			.key(0, 1, easingScale)
-			.key(100, rndScale())
+			.key(100, scale)
 })
 
 animation.load('anim1')
