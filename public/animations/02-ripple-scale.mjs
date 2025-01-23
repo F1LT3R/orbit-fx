@@ -19,8 +19,7 @@ const winCenterY = window.innerHeight / 2
 $boxes.forEach(($box, index) => {
     const boxCenter = center($box)
     const distance = dist(boxCenter.x, boxCenter.x, winCenterX, winCenterY)
-    const delay = distance / 10
-    console.log({ delay, $box })
+    const delay = (60 / window.innerWidth) * distance
 
     /* prettier-ignore */
     timeline.actor(`box-${index}`, css3D($box))
