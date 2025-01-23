@@ -4,17 +4,15 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Orbit-FX - Element Animator</title>
-        <!-- <script src="vendor/orbit-fx/main.mjs" type="module"></script> -->
-        <!-- <script src="./src/anim2.mjs" type="module"></script> -->
-        <script src="./src/demo-03.mjs" type="module"></script>
         <link rel="stylesheet" href="./style.css" />
+        <script src="./main.mjs" type="module"></script>
     </head>
     <body>
         <header>Fixed Header</header>
         <main>
             <div class="row">
-                <div class="box big">Big 1</div>
-                <div class="box big">Big 2</div>
+                <div class="box big" data-animation="00-random-spin">Big 1</div>
+                <div class="box big" data-animation="01-foo">Big 2</div>
             </div>
             <div class="row">
                 <div class="box small">Small 1</div>
