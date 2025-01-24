@@ -19,6 +19,8 @@ npm start
 
 This verbose example, demonstrates how to create an Orbit-FX animation. In this example, an absolutely positioned div, is bounced around in a square motion. When the timeline ends, the user is alerted. Upon clicking OK, the animation begins looping forever.
 
+Try this example: []
+
 ```js
 import Animation from '../orbit-fx/main.mjs'
 
