@@ -1,11 +1,11 @@
-import Animation, { css3D } from '../orbit-fx/main.mjs'
+import Animator, { css3D } from '../orbit-fx/main.mjs'
 
 const $boxes = document.querySelectorAll('.box')
 
 let speed = 2
 const easing = 'inOutQuad'
 
-const animation = new Animation(60)
+const animation = new Animator(60)
 const timeline = animation.timeline('anim1', 0, 200, speed, false, (timeline) => {
     timeline.pauseAtFrame(0)
 })

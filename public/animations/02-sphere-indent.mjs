@@ -1,4 +1,4 @@
-import Animation, { css3D } from '../orbit-fx/main.mjs'
+import Animator, { css3D } from '../orbit-fx/main.mjs'
 import dist from '../helpers/dist.mjs'
 import center from '../helpers/center.mjs'
 
@@ -6,7 +6,7 @@ const $boxes = document.querySelectorAll('.box')
 
 let speed = 20
 
-const animation = new Animation(60)
+const animation = new Animator(60)
 const timeline = animation.timeline('anim1', 0, 1000, speed, false, (timeline) => {
     timeline.speed = -speed
 })

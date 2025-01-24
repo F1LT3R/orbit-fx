@@ -159,21 +159,146 @@ const callback = (timeline) => {
 }
 ```
 
+## Actor
+
+Syntax
+
+```js
+.actor(name, actorObjectOrHandler)
+```
+
+An `Actor` is an object that is animated on your `Timeline`.
+
+The `Animator` will automatically update the animated properties on your Actor's JavaScript object.
+
+```js
+const actor = { left: 0, top: 0 }
+
+timeline.actor('name', actor)
+```
+
+### Actor Handler
+
+Because Orbit-FX is a Universal Animator, it doesn't know about the properties of your objects. So, if you are animating things like CSS properties, you will need to pass a handler in to account for the correct CSS Units, like `px`, `em` or `%`.
+
+The `Animator` will call the `update` method on your handler, passing in the tracks being animated.
+
+```js
+const $actor = document.querySelector('#actor')
+
+const actorHandler = {
+    left: 0,
+    top: 0,
+    update: (tracks) => {
+        if (tracks.left) {
+            $actor.style.left = actorHandler.left + 'px'
+        }
+
+        if (tracks.top) {
+            $actor.style.top = actorHandler.top + 'px'
+        }
+    },
+}
+
+timeline.actor('name', actorHandler)
+```
+
+### Built-In Handler
+
+Syntax
+
+```js
+.actor('actor-name', actorObject)
+```
+
+Orbit-FX ships with a built in handler for CSS 3D transforms. It is also capable of handling `opacity` and `backgroundColor` in RGBA color format.
+
+You can import `css3D` to use instead of writing your own handler.
+
+```js
+import Animator, { css3D } from 'orbit-fx'
+
+const $actor = document.querySelector('#actor')
+
+timeline.actor('name', css3D($actor))
+```
+
+## Track
+
+Syntax
+
+```js
+.track(actorPropertyToAnimate)
+```
+
+A `Track` represents the frame-space for a given property of an `Actor`. All of the properties of an `Actor` that you wish to animate, will be controlled via their own individual tracks.
+
+```js
+import Animator, { css3D } from 'orbit-fx'
+
+const $actor = document.querySelector('#actor')
+
+/* prettier-ignore */
+timeline.actor('name', css3D($actor))
+	.track('translateX')
+	.track('translateY')
+```
+
+## Key
+
+Syntax
+
+```js
+.key(frame, value, easing)
+```
+
+A `Key` represents a key-frame within your `Track`.
+
+A `Key` represents the intended value of a tracked property at given frame.
+
+An `Easing` value is passed in as the last argument of your `Key` frame.
+
+```js
+/* prettier-ignore */
+timeline.actor('name', css3D($actor))
+	.track('translateX')
+		.key(0, 0, 'bounceOut')
+		.key(100, 0)
+	.track('translateY')
+		.key(0, 0, 'bounceIn')
+		.key(100, 0)
+```
+
+## Chaining
+
+Orbit-FX allows chaining of the syntax used to create animations. This helps to produce tighter code, that aids cognition when working with animations that become more complex.
+
+```js
+import Animator, { css3D } from 'orbit-fx'
+
+const $actor = document.querySelector('#actor')
+
+/* prettier-ignore */
+const animation = new Animator(60)
+	.timeline('name', start, end, speed, looping, callback)
+		.actor('name', css3D($actor))
+			.track('translateX')
+				.key(0, 0, 'bounceOut')
+				.key(100, 0)
+			.track('translateY')
+				.key(0, 0, 'bounceIn')
+				.key(100, 0)
+```
+
 ## Easing
+
+> **Easing Demonstration:** Click on the link below for a demonstration of all 32 easing modes combined into a single animation. [Click here to try the easing example](https://f1lt3r.github.io/orbit-fx/public/examples/example-2.html)
 
 Orbit-FX currently supports 32 types of easing. Combining different kinds of easing in your animations allows for some fantastic effects.
 
 The default easing is `linear`, which is used by the animator when you do not pass an easing type into the last argument of your `Key` frame.
 
 If you want the property of an `Actor` to "jump" without interpolation when it reaches a given frame, use the `step` easing type.
-
-### Easing Demonstration
-
-<img style="float: left; margin: 0 16px 16px; max-height: 116px" src="public/assets/easing-examples.png">
-
-Click on the link below for a demonstration of all 32 easing modes used in a single animation.
-
-[Try the easing example](https://f1lt3r.github.io/orbit-fx/public/examples/example-2.html)
 
 ### List of Easing Types
 
@@ -209,3 +334,7 @@ Click on the link below for a demonstration of all 32 easing modes used in a sin
 - `inBounce`
 - `outBounce`
 - `inOutBounce`
+
+```
+
+```

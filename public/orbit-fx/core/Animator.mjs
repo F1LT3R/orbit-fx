@@ -14,6 +14,8 @@ export default class Animation {
         if (typeof onFrame === 'function') {
             this.onFrame = onFrame
         }
+
+        return this
     }
 
     timeline(name, start, end, speed, loop, callback) {
