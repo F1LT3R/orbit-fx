@@ -159,7 +159,7 @@ const callback = (timeline) => {
 }
 ```
 
-## Types of Easing
+## Easing
 
 Orbit-FX currently supports 32 types of easing. Combining different kinds of easing in your animations allows for some fantastic effects.
 
@@ -167,9 +167,15 @@ The default easing is `linear`, which is used by the animator when you do not pa
 
 If you want the property of an `Actor` to "jump" without interpolation when it reaches a given frame, use the `step` easing type.
 
+### Easing Demonstration
+
+<img style="float: left; margin: 0 16px 16px; max-height: 116px" src="public/assets/easing-examples.png">
+
 Click on the link below for a demonstration of all 32 easing modes used in a single animation.
 
 [Try the easing example](https://f1lt3r.github.io/orbit-fx/public/examples/example-2.html)
+
+### List of Easing Types
 
 - `step`
 - `linear`
