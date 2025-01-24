@@ -42,7 +42,7 @@ main {
     margin-top: 60px;
     padding: 20px;
     height: 100px;
-    perspective: 500px;
+    perspective: 900px;
     max-width: 900px;
     margin: 60px auto -60px auto;
 }

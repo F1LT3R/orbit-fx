@@ -17,7 +17,11 @@ npm start
 
 ## Demo
 
+The following demonstration shows eight different styles of animation, applied to a group of flex-box elements, using 3D CSS Transforms.
+
 [Try the demo](https://f1lt3r.github.io/orbit-fx/public/)
+
+[![Demo Screenshot](./public/assets/demo-screenshot.png)](https://f1lt3r.github.io/orbit-fx/public/)
 
 ## Usage
 
