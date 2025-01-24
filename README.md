@@ -169,7 +169,7 @@ If you want the property of an `Actor` to "jump" without interpolation when it r
 
 Click on the link below for a demonstration of all 32 easing modes used in a single animation.
 
-[Try the easing example](https://f1lt3r.github.io/orbit-fx/public/examples/example-1.html)
+[Try the easing example](https://f1lt3r.github.io/orbit-fx/public/examples/example-2.html)
 
 - `step`
 - `linear`
