@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Orbit-FX - Example 1</title>
+        <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+        <style>
+            #actor {
+                background: red;
+                position: absolute;
+                left: 100px;
+                top: 100px;
+                width: 20px;
+                height: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="actor"></div>
+
+        <script type="module">
+            import Animation from '../orbit-fx/main.mjs'
+
+            const framesPerSecond = 60
+            const animation = new Animation(framesPerSecond)
+
+            const name = 'squareBounce'
+            const start = 0
+            const end = 400
+            const speed = 4
+            const loop = false
+
+            let alertWasSeen = false
+
+            const callback = (timeline) => {
+                if (!alertWasSeen) {
+                    alert(`Timeline '${timeline.name}' ended at frame '${timeline.frame}'`)
+                    alert(`Click 'OK' to loop the animation.`)
+                    alertWasSeen = true
+                }
+
+                timeline.frame = 0
+                animation.play()
+            }
+
+            const timeline = animation.timeline(name, start, end, speed, loop, callback)
+
+            const $div = document.querySelector('#actor')
+
+            const handler = {
+                left: 100,
+                top: 100,
+
+                update: () => {
+                    $div.style.left = handler.left + 'px'
+                    $div.style.top = handler.top + 'px'
+                },
+            }
+
+            const actorName = 'div'
+            const easing = 'outBounce'
+
+            /* prettier-ignore */
+            timeline.actor(actorName, handler)
+				.track('left')
+					.key(0, 100, easing)
+					.key(100, 200, easing)
+					.key(200, 200, easing)
+					.key(300, 100, easing)
+				.track('top')
+					.key(0, 100, easing)
+					.key(100, 100, easing)
+					.key(200, 200, easing)
+					.key(300, 200, easing)
+					.key(400, 100, easing)
+
+            setTimeout(() => {
+                animation.load('squareBounce')
+                animation.play()
+            }, 1000)
+        </script>
+    </body>
+</html>

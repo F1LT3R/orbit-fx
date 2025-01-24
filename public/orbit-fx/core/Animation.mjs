@@ -70,6 +70,11 @@ export default class Animation {
     }
 
     play() {
+        if (Object.entries(this.loaded).length === 0) {
+            console.warn('You have not loaded any timelines for playback.')
+            return
+        }
+
         window.clearInterval(this.interval)
 
         const millisecondsPerFrame = 1000 / this.fps
