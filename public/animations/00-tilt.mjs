@@ -1,4 +1,4 @@
-import Animation, { css3D } from '/orbit-fx/main.mjs'
+import Animation, { css3D } from '../orbit-fx/main.mjs'
 
 const $boxes = document.querySelectorAll('.box')
 

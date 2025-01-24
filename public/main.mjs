@@ -17,7 +17,7 @@ $boxes.forEach(($box) => {
             return
         }
 
-        const filePath = `/animations/${animationName}.mjs`
+        const filePath = `./animations/${animationName}.mjs`
 
         const existingModule = modules[animationName]
 

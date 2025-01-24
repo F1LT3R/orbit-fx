@@ -1,6 +1,6 @@
-import { css3D } from '/orbit-fx/main.mjs'
-import dist from '/helpers/dist.mjs'
-import center from '/helpers/center.mjs'
+import { css3D } from '../orbit-fx/main.mjs'
+import dist from '../helpers/dist.mjs'
+import center from '../helpers/center.mjs'
 
 const $boxes = document.querySelectorAll('.box')
 
