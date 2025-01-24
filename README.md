@@ -334,7 +334,3 @@ If you want the property of an `Actor` to "jump" without interpolation when it r
 - `inBounce`
 - `outBounce`
 - `inOutBounce`
-
-```
-
-```
