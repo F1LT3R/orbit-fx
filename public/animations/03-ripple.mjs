@@ -1,4 +1,4 @@
-import { css3D } from '/vendor/orbit-fx/main.mjs'
+import { css3D } from '/orbit-fx/main.mjs'
 import dist from '/helpers/dist.mjs'
 import center from '/helpers/center.mjs'
 
@@ -6,7 +6,6 @@ const $boxes = document.querySelectorAll('.box')
 
 const winCenterX = window.innerWidth / 2
 const winCenterY = window.innerHeight / 2
-const rippleRatio = Math.sqrt(window.innerWidth * window.innerHeight) / 1.25
 
 const boxes = Array.from($boxes).map(($box) => {
     const handler = css3D($box)

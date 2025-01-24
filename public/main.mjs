@@ -13,8 +13,11 @@ $boxes.forEach(($box) => {
     $box.addEventListener('click', () => {
         const animationName = $box.getAttribute('data-animation')
 
+        if (!animationName) {
+            return
+        }
+
         const filePath = `/animations/${animationName}.mjs`
-        console.log(filePath)
 
         const existingModule = modules[animationName]
 
@@ -29,6 +32,8 @@ $boxes.forEach(($box) => {
         // Dynamically import and play animation if not yet loaded
         import(filePath).then((module) => {
             stopLastModule()
+
+            console.log(`Loaded: ${filePath}`)
 
             modules[animationName] = module
             lastModule = animationName

@@ -7,12 +7,6 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #eeeeee;
-    background-image: 
-        /* url('img/contour-background.webp'), */ linear-gradient(
-        180deg,
-        rgba(232, 232, 232, 0.75),
-        rgba(255, 255, 255, 0.75)
-    );
     background-repeat: repeat;
     background-size: auto;
     height: 100vh;
@@ -36,7 +30,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* box-shadow: 0px 50px 50px rgba(255, 150, 0, 0.4); */
     z-index: 1000;
 }
 
@@ -54,8 +47,6 @@ main {
 }
 
 .box {
-    /* border:1px solid rgba(255, 255, 255, 0.5); */
-    /* background-color: rgba(255, 255, 255, 0.75); */
     background-color: rgba(128, 128, 128, 0.75);
     transform-origin: 50% 50% 0;
     transform-style: preserve-3d;
@@ -66,8 +57,11 @@ main {
     justify-content: center;
     margin-right: 10px;
     border-radius: 4px;
-    cursor: pointer;
     padding: 16px;
+}
+
+.box[data-animation] {
+    cursor: pointer;
 }
 
 .box:last-child {
