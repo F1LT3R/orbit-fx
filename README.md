@@ -15,22 +15,22 @@ npm install
 npm start
 ```
 
-## Demo
+## Demonstration
 
-The following demonstration shows eight different styles of animation, applied to a group of flex-box elements, using 3D CSS Transforms.
+The following demonstration shows eight animation styles, applied to a group of flex-box elements. In this demonstration, Orbit-FX is used to control the values of the elements' 3D CSS Transforms. Note: Orbit-FX can be used to animate _anything_, by passing a custom handler into the animator.
 
 [Try the demo](https://f1lt3r.github.io/orbit-fx/public/)
 
 [![Demo Screenshot](./public/assets/demo-screenshot.png)](https://f1lt3r.github.io/orbit-fx/public/)
 
-## Usage
+## Example Usage
 
 This verbose example, demonstrates how to create an Orbit-FX animation. In this example, an absolutely positioned div, is bounced around in a square motion. When the timeline ends, the user is alerted. Upon clicking OK, the animation begins looping forever.
 
 [Try this example](https://f1lt3r.github.io/orbit-fx/public/examples/example-1.html)
 
 ```js
-import Animation from '../orbit-fx/main.mjs'
+import Animation from 'orbit-fx'
 
 const framesPerSecond = 60
 const animation = new Animation(framesPerSecond)
@@ -89,9 +89,77 @@ animation.load('squareBounce')
 animation.play()
 ```
 
-## Animation
+## Animator Hierarchy
 
-## Easing
+Orbit-FX is constructed with the following hierarchy.
+
+```mermaid
+graph LR;
+	Animator --> Timeline --> Actor --> Track --> Key;
+```
+
+Each animation can have multiple timelines. Each timeline can have muliple actors. Each actor can have multiple tracks. And each track can have multiple keys.
+
+Here is a diagram of a more complex animation, that has two timelines and three actors. An `Actor` is an object that is being animated, a `Track` is a property of an Actor that you want to animate. And a `Key` is a key frame in the animation.
+
+Note: each timeline can be loaded and unloaded individually. You can play timelines together, or independently.
+
+```mermaid
+graph LR;
+	Animator --> Timeline1 --> Actor1 --> Track1 --> Key1;
+	Track1 --> Key2;
+	Actor1 --> Track2;
+	Track2 --> Key3;
+	Track2 --> Key4;
+	Animator --> Timeline2 --> Actor2 --> Track3 --> Key5;
+	Track3 --> Key6;
+	Actor2 --> Track4;
+	Track4 --> Key7;
+	Track4 --> Key8;
+	Timeline2 --> Actor3;
+	Actor3 --> Track5 --> Key9;
+	Track5 --> Key10;
+	Actor3 --> Track6 --> Key11;
+	Track6 --> Key12;
+```
+
+## Animator
+
+The `Animator` is the global controller for a set of timelines, and is instantiated as an `animation`.
+
+```js
+import Animator from 'orbit-fx'
+
+const fps = 60
+const animation = new Animator(fps)
+```
+
+## Timeline
+
+A `Timeline` is a frame-space within which to animate your actors.
+
+```js
+const timeline = animation.timeline('name', start, end, speed, loop, callback)
+```
+
+## Callback
+
+The instantiated `timeline` object is passed into the callback as the first argument.
+
+The callback is never fired when the animation is looping.
+
+```js
+const callback = (timeline) => {
+    // Alerts the end frame of the animation
+    alert(timeline.frame)
+
+    // Play the animation again
+    timeline.frame = 0
+    animation.play()
+}
+```
+
+## Types of Easing
 
 Types of Easing
 
@@ -127,3 +195,7 @@ Types of Easing
 - `inBounce`
 - `outBounce`
 - `inOutBounce`
+
+```
+
+```
