@@ -1,6 +1,6 @@
 /* prettier-ignore */
 export default ({
-	step          : function(x,t,b,c,d){ if( t==d ){ return d; }else{ return 1; } },
+	step          : function(x,t,b,c,d){ if( t==d-1 ){ return b+c; }},
 	linear        : function(x,t,b,c,d){ return c*t/d + b; },
 	inOutQuad     : function(x,t,b,c,d){ if((t/=d/2) < 1){ return c/2*t*t + b;}else{ return -c/2 * ((--t)*(t-2) - 1) + b; }},
 	inQuad        : function(x,t,b,c,d){ return c*(t/=d)*t + b; },

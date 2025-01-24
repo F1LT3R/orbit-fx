@@ -2,7 +2,7 @@
 
 # Orbit-FX
 
-A quick code example to demonstrate how to write a DOM element animator, to create beautiful, interactive animations with JavaScript and CSS.
+I put this project together very quickly, to demonstrate how to write a universal key-frame animator for the web &mdash; an animator capable of beautiful, smooth animations, with programmable hooks for user interactions.
 
 ## Installation
 
@@ -142,11 +142,11 @@ A `Timeline` is a frame-space within which to animate your actors.
 const timeline = animation.timeline('name', start, end, speed, loop, callback)
 ```
 
-## Callback
+### `Callback`
 
 The instantiated `timeline` object is passed into the callback as the first argument.
 
-The callback is never fired when the animation is looping.
+The callback is never fired while the animation is looping.
 
 ```js
 const callback = (timeline) => {
@@ -161,7 +161,15 @@ const callback = (timeline) => {
 
 ## Types of Easing
 
-Types of Easing
+Orbit-FX currently supports 32 types of easing. Combining different kinds of easing in your animations allows for some fantastic effects.
+
+The default easing is `linear`, which is used by the animator when you do not pass an easing type into the last argument of your `Key` frame.
+
+If you want the property of an `Actor` to "jump" without interpolation when it reaches a given frame, use the `step` easing type.
+
+Click on the link below for a demonstration of all 32 easing modes used in a single animation.
+
+[Try the easing example](https://f1lt3r.github.io/orbit-fx/public/examples/example-1.html)
 
 - `step`
 - `linear`
@@ -195,7 +203,3 @@ Types of Easing
 - `inBounce`
 - `outBounce`
 - `inOutBounce`
-
-```
-
-```

@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Orbit-FX - Example 2</title>
+        <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+        <style>
+            .actor {
+                border: 1px solid black;
+                position: absolute;
+                left: 0px;
+                width: 100px;
+                height: 20px;
+                font-size: 16px;
+                text-align: center;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="step" class="actor" style="top: 0px; background: Red">step</div>
+        <div id="linear" class="actor" style="top: 20px; background: Orange">linear</div>
+        <div id="inOutQuad" class="actor" style="top: 40px; background: Yellow">inOutQuad</div>
+        <div id="inQuad" class="actor" style="top: 60px; background: Lime">inQuad</div>
+        <div id="outQuad" class="actor" style="top: 80px; background: Green">outQuad</div>
+        <div id="inCubic" class="actor" style="top: 100px; background: Cyan">inCubic</div>
+        <div id="outCubic" class="actor" style="top: 120px; background: Blue">outCubic</div>
+        <div id="inOutCubic" class="actor" style="top: 140px; background: Magenta">inOutCubic</div>
+        <div id="inQuart" class="actor" style="top: 160px; background: Pink">inQuart</div>
+        <div id="outQuart" class="actor" style="top: 180px; background: DeepPink">outQuart</div>
+        <div id="inOutQuart" class="actor" style="top: 200px; background: HotPink">inOutQuart</div>
+        <div id="inQuint" class="actor" style="top: 220px; background: Tomato">inQuint</div>
+        <div id="outQuint" class="actor" style="top: 240px; background: Gold">outQuint</div>
+        <div id="inOutQuint" class="actor" style="top: 260px; background: Coral">inOutQuint</div>
+        <div id="inSine" class="actor" style="top: 280px; background: Crimson">inSine</div>
+        <div id="outSine" class="actor" style="top: 300px; background: MediumVioletRed">
+            outSine
+        </div>
+        <div id="inOutSine" class="actor" style="top: 320px; background: DodgerBlue">inOutSine</div>
+        <div id="inExpo" class="actor" style="top: 340px; background: MediumSpringGreen">
+            inExpo
+        </div>
+        <div id="outExpo" class="actor" style="top: 360px; background: SpringGreen">outExpo</div>
+        <div id="inOutExpo" class="actor" style="top: 380px; background: Chartreuse">inOutExpo</div>
+        <div id="inCirc" class="actor" style="top: 400px; background: ForestGreen">inCirc</div>
+        <div id="outCirc" class="actor" style="top: 420px; background: Turquoise">outCirc</div>
+        <div id="inOutCirc" class="actor" style="top: 440px; background: Aqua">inOutCirc</div>
+        <div id="inElastic" class="actor" style="top: 460px; background: Teal">inElastic</div>
+        <div id="outElastic" class="actor" style="top: 480px; background: Indigo; color: white">
+            outElastic
+        </div>
+        <div id="inOutElastic" class="actor" style="top: 500px; background: Violet">
+            inOutElastic
+        </div>
+        <div id="inBack" class="actor" style="top: 520px; background: Orchid">inBack</div>
+        <div id="outBack" class="actor" style="top: 540px; background: DarkOrange">outBack</div>
+        <div id="inOutBack" class="actor" style="top: 560px; background: Fuchsia">inOutBack</div>
+        <div id="inBounce" class="actor" style="top: 580px; background: LightSeaGreen">
+            inBounce
+        </div>
+        <div id="outBounce" class="actor" style="top: 600px; background: RoyalBlue">outBounce</div>
+        <div id="inOutBounce" class="actor" style="top: 620px; background: MediumOrchid">
+            inOutBounce
+        </div>
+
+        <script type="module">
+            import Animation, { ease } from '../orbit-fx/main.mjs'
+
+            const framesPerSecond = 60
+            const animation = new Animation(framesPerSecond)
+            const $divs = document.querySelectorAll('.actor')
+
+            const divHandler = function ($div) {
+                const handler = {
+                    left: 0,
+                    $element: $div,
+                    update: () => {
+                        $div.style.left = handler.left + 'px'
+                    },
+                }
+                return handler
+            }
+
+            const divs = Array.from($divs).map(($div) => {
+                const handler = divHandler($div)
+                return handler
+            })
+
+            const timeline = animation.timeline('easingExamples', 0, 201, 1, true)
+
+            divs.forEach((div) => {
+                const easing = div.$element.getAttribute('id')
+
+                /* prettier-ignore */
+                timeline.actor(`div-${easing}`, div)
+					.track('left')
+						.key(0, 0, easing)
+						.key(100, 200, easing)
+						.key(200, 0)
+            })
+
+            setTimeout(() => {
+                animation.load('easingExamples')
+                animation.play()
+            }, 1000)
+        </script>
+    </body>
+</html>
