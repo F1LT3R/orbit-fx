@@ -15,11 +15,15 @@ npm install
 npm start
 ```
 
+## Demo
+
+[Try the demo](https://f1lt3r.github.io/orbit-fx/public/)
+
 ## Usage
 
 This verbose example, demonstrates how to create an Orbit-FX animation. In this example, an absolutely positioned div, is bounced around in a square motion. When the timeline ends, the user is alerted. Upon clicking OK, the animation begins looping forever.
 
-Try this example: []
+[Try this example](https://f1lt3r.github.io/orbit-fx/public/examples/example-1.html)
 
 ```js
 import Animation from '../orbit-fx/main.mjs'
