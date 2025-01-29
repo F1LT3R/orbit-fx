@@ -1,0 +1,13 @@
+#goo-video {
+    width: 712px;
+    height: 400px;
+    object-fit: cover;
+    mask: url(#goo-mask);
+    -webkit-mask: url(#goo-mask);
+}
+
+svg {
+    background: black;
+    width: 712px;
+    height: 400px;
+}

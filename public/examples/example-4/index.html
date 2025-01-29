@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>SVG Goo Mask w/ HTML5 Video</title>
+        <link rel="stylesheet" href="./style.css" />
+        <link
+            rel="icon"
+            href="https://f1lt3r.github.io/orbit-fx/public/favicon.ico"
+            type="image/x-icon"
+        />
+    </head>
+    <body>
+        <svg width="0" height="0" style="position: absolute">
+            <defs>
+                <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                    <feColorMatrix
+                        in="blur"
+                        mode="matrix"
+                        values="
+					1 0 0 0 0
+					0 1 0 0 0
+					0 0 1 0 0
+					0 0 0 80 -12
+					"
+                        result="goo"
+                    />
+                    <feBlend in="SourceGraphic" in2="goo" />
+                </filter>
+
+                <mask id="goo-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="712" height="400">
+                    <rect width="712" height="400" fill="black" />
+
+                    <g filter="url(#goo)">
+                        <circle id="circle" cx="100" cy="100" r="100" fill="white" />
+
+                        <rect id="square" x="200" y="0" width="200" height="200" fill="white" />
+
+                        <polygon
+                            id="triangle"
+                            points="0,200 200,200 100,0"
+                            transform="translate(100,100) rotate(0, 100, 100)"
+                            fill="white"
+                        />
+                    </g>
+                </mask>
+            </defs>
+        </svg>
+
+        <video id="goo-video" autoplay muted loop>
+            <source src="./BigBuckBunny_320x180.mp4" type="video/mp4" />
+        </video>
+
+        <div style="max-width: 712px">
+            <div>
+                <span>Play Controls</span>
+                <button id="sound">Sound (Off)</button>
+                <button id="animate">Animate (On)</button>
+            </div>
+            <div>
+                <p>Circle</p>
+                <input type="range" min="0" max="712" name="circleX" style="width: 712px" />
+                <input type="range" min="0" max="400" name="circleY" style="width: 712px" />
+            </div>
+
+            <div>
+                <p>Square</p>
+                <input type="range" min="0" max="712" name="squareX" style="width: 712px" />
+                <input type="range" min="0" max="400" name="squareY" style="width: 712px" />
+            </div>
+
+            <div>
+                <p>Triangle</p>
+                <input type="range" min="0" max="712" name="triangleX" style="width: 712px" />
+                <input type="range" min="0" max="400" name="triangleY" style="width: 712px" />
+                <input type="range" min="0" max="1080" name="triangleDeg" style="width: 712px" />
+            </div>
+        </div>
+
+        <script type="module" src="./animation.mjs"></script>
+    </body>
+</html>
