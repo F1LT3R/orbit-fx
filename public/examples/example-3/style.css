@@ -48,8 +48,7 @@ body {
 	100% {
 	  background-position: -100% -300%;
 	}
-  }
-  
+}
 
 .container {
 	position: relative;
@@ -58,7 +57,7 @@ body {
 }
 
 button {
-	/* opacity: 0.8; */
+	margin-top: -40px;
 	position: relative;
 	display: inline-block;
 	z-index: 1;
@@ -113,6 +112,7 @@ button:hover {
 }
 
 .glow, .lines {
+	margin-top: -40px;
 	position: relative;
 	display: inline-block;
 	z-index: -1;
