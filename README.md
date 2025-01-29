@@ -15,13 +15,21 @@ npm install
 npm start
 ```
 
-## Demonstration
+## Demonstration #1
 
-The following demonstration shows eight animation styles, applied to a group of flex-box elements. In this demonstration, Orbit-FX is used to control the values of the elements' 3D CSS Transforms. Note: Orbit-FX can be used to animate _anything_, by passing a custom handler into the animator.
+The first demonstration shows eight animation styles, applied to a group of flex-box elements. In this demonstration, Orbit-FX is used to control the values of the elements' 3D CSS Transforms. Note: Orbit-FX can be used to animate _anything_, by passing a custom handler into the animator.
 
 [Try the demo](https://f1lt3r.github.io/orbit-fx/public/)
 
-[![Demo Screenshot](./public/assets/demo-screenshot.png)](https://f1lt3r.github.io/orbit-fx/public/)
+[![Demo #1 Screenshot](./public/assets/demo-screenshot.png)](https://f1lt3r.github.io/orbit-fx/public/)
+
+## Demonstration #2
+
+The second demonstration combines CSS Keyframe Animations with SVG Filters, the properties of which are controlled by Orbit-FX - to create an engaging hover animation. In this demo, Orbit-FX is animating a fractal turbulence filter, and gaussian blurred displacement map filter with a hue-cycle. The source input for these SVG filters, is the a CSS box-shadow keyframe animation.
+
+[Try the demo](https://f1lt3r.github.io/orbit-fx/public/examples/example-3/)
+
+[![Demo #2 Screenshot](/public/assets/demo-2-css-keyframes-svg-filters.png)](https://f1lt3r.github.io/orbit-fx/public/examples/example-3/)
 
 ## Example Usage
 
