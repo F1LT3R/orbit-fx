@@ -15,7 +15,7 @@ npm install
 npm start
 ```
 
-## Demonstration #1
+## Demonstration #1 - Element Transitions 3D
 
 The first demonstration shows eight animation styles, applied to a group of flex-box elements. In this demonstration, Orbit-FX is used to control the values of the elements' 3D CSS Transforms. Note: Orbit-FX can be used to animate _anything_, by passing a custom handler into the animator.
 
@@ -23,15 +23,23 @@ The first demonstration shows eight animation styles, applied to a group of flex
 
 [![Demo #1 Screenshot](./public/assets/demo-screenshot.png)](https://f1lt3r.github.io/orbit-fx/public/)
 
-## Demonstration #2
+## Demonstration #2 - Beacon Hover Button
 
-The second demonstration combines CSS Keyframe Animations with SVG Filters, the properties of which are controlled by Orbit-FX - to create an engaging hover animation. In this demo, Orbit-FX is animating a fractal turbulence filter, and gaussian blurred displacement map filter with a hue-cycle. The source input for these SVG filters, is the a CSS box-shadow keyframe animation.
+The second demonstration combines CSS Keyframe Animations with SVG Filters to create an engaging hover animation. In this demo, Orbit-FX is animating a fractal turbulence filter, and gaussian blurred displacement filter with a hue-cycle. The source input for the SVG filters, is a CSS box-shadow keyframe animation.
 
 [Try the demo](https://f1lt3r.github.io/orbit-fx/public/examples/example-3/)
 
 [![Demo #2 Screenshot](/public/assets/demo-2-css-keyframes-svg-filters.png)](https://f1lt3r.github.io/orbit-fx/public/examples/example-3/)
 
-## Example Usage
+## Demonstration #3 - SVG Goo Mask w/ Video Reveal
+
+The third demonstration shows a "Goo" effect using SVG filters. The Goo effect merges shapes as they get close to each-other, like wax in a lava-lamp. The mask reveals an HTML5 video playing in the background. I have added controls so you can move the shapes around to play with the effect. Please note: You may need to wait a few seconds for the video to load.
+
+[Try the demo](https://f1lt3r.github.io/orbit-fx/public/examples/example-4/)
+
+[![Demo #3 Screenshot](/public/assets/demo-3-svg-goo-mask.png)](https://f1lt3r.github.io/orbit-fx/public/examples/example-4/)
+
+## Orbit-FX &mdash; Example Usage
 
 This verbose example, demonstrates how to create an Orbit-FX animation. In this example, an absolutely positioned div, is bounced around in a square motion. When the timeline ends, the user is alerted. Upon clicking OK, the animation begins looping forever.
 
