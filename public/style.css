@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'AudioWide';
+    src: url('./assets/Audiowide-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +13,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #eeeeee;
+    background-color: #212121;
     background-repeat: repeat;
     background-size: auto;
     height: 100vh;
@@ -20,22 +27,30 @@ body {
 }
 
 header {
+    font-family: AudioWide;
+    letter-spacing: 3px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 60px;
-    background-color: rgba(32, 32, 32, 0.9);
-    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
     display: flex;
-    align-items: center;
     justify-content: center;
     z-index: 1000;
+    align-items: center;
 }
 
 header img {
     max-height: 40px;
     margin-right: 16px;
+}
+
+header h1 {
+    background: linear-gradient(45deg, rgba(255, 128, 0, 0.9), #9b00ff);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 main {
@@ -54,17 +69,27 @@ main {
 }
 
 .box {
-    background-color: rgba(128, 128, 128, 0.75);
+    background-color: rgba(128, 128, 128, 0.5);
+    border: 0.5px solid rgba(255, 255, 255, 0.05);
     transform-origin: 50% 50% 0;
     transform-style: preserve-3d;
     height: 100px;
-    color: white;
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 10px;
     border-radius: 4px;
     padding: 16px;
+    box-shadow: 0 50px 16px inset rgba(0, 0, 0, 0.125);
+    transition:
+        background-color 0.3s ease-in-out,
+        box-shadow 0.3s ease-in-out;
+}
+
+.box:hover {
+    background-color: rgba(128, 128, 128, 0.7);
+    box-shadow: 0 50px 8px inset rgba(0, 0, 0, 0.125);
 }
 
 .box[data-animation] {
