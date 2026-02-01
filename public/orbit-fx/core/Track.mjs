@@ -55,7 +55,7 @@ export default class Track {
         return false
     }
 
-    play(frame) {
+    play(frame, frameData, callbackQueue) {
         for (let i = 0, l = this.keys.length; i < l; i += 1) {
             const curKey = this.keys[i]
             let nextKey = this.keys[i + 1]
@@ -65,8 +65,24 @@ export default class Track {
             }
 
             if (frame >= curKey.frame && frame < nextKey.frame) {
+                const objectRef = this.parent.objectReference
+
+                // Initialize Registry Entries if needed
+                if (!frameData.has(objectRef)) {
+                    frameData.set(objectRef, new Map())
+                }
+                const objProps = frameData.get(objectRef)
+
+                if (!objProps.has(this.prop)) {
+                    objProps.set(this.prop, [])
+                }
+                const valueList = objProps.get(this.prop)
+
                 if (curKey.isArray) {
                     const aryLen = curKey.aryLen
+                    // Ensure we are pushing arrays correctly
+                    // We need a fresh array for the interpolated result
+                    const interpolatedAry = []
 
                     for (let indice = 0; indice < aryLen; indice += 1) {
                         const val = this.ease[curKey.ease](
@@ -76,11 +92,11 @@ export default class Track {
                             nextKey.value[indice] - curKey.value[indice],
                             nextKey.frame - curKey.frame,
                         )
-
-                        this.parent.objectReference[this.prop][indice] = val
+                        interpolatedAry[indice] = val
                     }
+                    valueList.push(interpolatedAry)
                 } else if (curKey.isString) {
-                    this.parent.objectReference[this.prop] = curKey.value
+                    valueList.push(curKey.value)
                 } else {
                     const val = this.ease[curKey.ease](
                         0,
@@ -89,8 +105,7 @@ export default class Track {
                         nextKey.value - curKey.value,
                         nextKey.frame - curKey.frame,
                     )
-
-                    this.parent.objectReference[this.prop] = val
+                    valueList.push(val)
                 }
 
                 if (this.lastKeyFired && this.lastKeyFired.frame != curKey.frame) {
@@ -98,33 +113,66 @@ export default class Track {
                 }
 
                 if (curKey.callback && !curKey.callbackFired) {
-                    curKey.callback.call(this.parent.objectReference, {
-                        frame: frame,
-                        prop: this.prop,
-                        orbitTrack: this,
+                    // Queue the callback
+                    callbackQueue.push({
+                        fn: curKey.callback,
+                        scope: this.parent.objectReference,
+                        args: {
+                            frame: frame,
+                            prop: this.prop,
+                            orbitTrack: this,
+                        },
                     })
 
                     curKey.callbackFired = true
                     this.lastKeyFired = curKey
                 }
-            } else if (frame >= nextKey.frame || frame === 0) {
-                if (curKey.isArray) {
-                    const aryLen = curKey.aryLen
+            } else if ((i === l - 1 && frame >= curKey.frame) || (i === 0 && frame === 0)) {
+                // Handling edge case where we are sitting exactly on a keyframe
+                // 1. We are the Last Key and frame is >= our time (Hold End)
+                // 2. We are the First Key and frame is 0 (Hold Start / Pre-start)
+                const objectRef = this.parent.objectReference
+                if (!frameData.has(objectRef)) frameData.set(objectRef, new Map())
+                const objProps = frameData.get(objectRef)
+                if (!objProps.has(this.prop)) objProps.set(this.prop, [])
+                const valueList = objProps.get(this.prop)
 
-                    for (let indice = 0; indice < aryLen; indice += 1) {
-                        this.parent.objectReference[this.prop][indice] = curKey.value[indice]
-                    }
-                } else if (typeof indice === 'number') {
-                    this.parent.objectReference[this.prop][indice] = curKey.value
+                if (curKey.isArray) {
+                    // Push a copy/new array
+                    valueList.push([...curKey.value])
+                } else if (typeof curKey.value !== 'undefined') {
+                    // Check undefined just in case
+                    valueList.push(curKey.value)
+                }
+
+                // Add Callback Logic here too
+                if (curKey.callback && !curKey.callbackFired) {
+                    // Queue the callback
+                    callbackQueue.push({
+                        fn: curKey.callback,
+                        scope: this.parent.objectReference,
+                        args: {
+                            frame: frame,
+                            prop: this.prop,
+                            orbitTrack: this,
+                        },
+                    })
+
+                    curKey.callbackFired = true
+                    this.lastKeyFired = curKey
                 }
             }
         }
 
         if (this.alwaysCallback) {
-            this.alwaysCallback.call(this.parent.objectReference, {
-                frame: frame,
-                prop: this.prop,
-                orbitTrack: this,
+            callbackQueue.push({
+                fn: this.alwaysCallback,
+                scope: this.parent.objectReference,
+                args: {
+                    frame: frame,
+                    prop: this.prop,
+                    orbitTrack: this,
+                },
             })
         }
     }

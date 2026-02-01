@@ -10,8 +10,14 @@ export default class Actor {
         return this
     }
 
-    update() {
-        this.objectReference.update(this.tracks)
+    update(frame) {
+        // Deprecated direct update
+    }
+
+    collect(frame, frameData, callbackQueue) {
+        for (const prop in this.tracks) {
+            this.tracks[prop].play(frame, frameData, callbackQueue)
+        }
     }
 
     track(prop) {

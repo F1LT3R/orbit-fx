@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Orbit-FX - Example 1</title>
+        <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+        <style>
+            #actor {
+                background: red;
+                position: absolute;
+                left: 0px;
+                top: 100px;
+                width: 20px;
+                height: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="actor"></div>
+
+        <script type="module">
+            import Animation from '../orbit-fx/main.mjs'
+
+            const framesPerSecond = 60
+            const animation = new Animation(framesPerSecond)
+
+            const start = 1
+            const end = 32800
+            const speed = 4
+            const loop = true
+
+            const timeline1 = animation.timeline('anim1', start, end, speed, loop)
+            const timeline2 = animation.timeline('anim2', start, end, speed, loop)
+
+            const $div = document.querySelector('#actor')
+
+            const handler = {
+                left: 100,
+                top: 100,
+
+                update: () => {
+                    $div.style.left = handler.left + 'px'
+                    $div.style.top = handler.top + 'px'
+                },
+            }
+
+            /* prettier-ignore */
+            timeline1.actor('div', handler)
+				.track('left')
+					.key(0, 0, 'inOutQuad')
+					.key(400, 400)
+
+            /* prettier-ignore */
+            timeline2.actor('div', handler)
+				.track('left')
+					.key(0, 0, 'outBounce')
+					.key(400, 400)
+
+            setTimeout(() => {
+                animation.load('anim1')
+                animation.load('anim2')
+                animation.play()
+            }, 1000)
+        </script>
+    </body>
+</html>
