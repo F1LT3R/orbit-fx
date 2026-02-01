@@ -23,31 +23,22 @@ export default class Timeline {
             return existingActor
         }
 
-        const newActor = new Actor(name, objectReference, this)
+        const newActor = new Actor(name, objectReference, null, this)
         this.actors[name] = newActor
         return newActor
     }
 
     pauseAtFrame(frame) {
         this.paused = true
-
-        for (var i in this.actors) {
-            let actor = this.actors[i]
-
-            for (var j in actor.tracks) {
-                actor.tracks[j].play(frame)
-            }
-
-            actor.update()
-        }
+        this.frame = frame
     }
 
-    play(frame) {
-        if (this.paused) {
-            return
+    play(frame, frameData, callbackQueue) {
+        if (typeof frame !== 'undefined') {
+            this.frame = frame
+        } else if (!this.paused) {
+            this.frame += this.speed
         }
-
-        this.frame = frame || (this.frame += this.speed)
 
         const looping = this.loop
 
@@ -67,6 +58,12 @@ export default class Timeline {
                 //this.parent.unload(this.name);
 
                 if (this.callback) {
+                    // Queue timeline callbacks too?
+                    // The plan focused on keyframe callbacks, but timeline callbacks should probably also be safe.
+                    // For now, keeping legacy behavior for timeline callback as it's 'controller' logic, not 'state' logic.
+                    // But to be consistent with state, we might arguably queue it.
+                    // User only asked about keyframe callbacks. Sticking to plan to avoid scope creep,
+                    // but calling it synchronously is safer for logic flow (looping etc).
                     this.callback(this)
                 }
             } else if (this.frame <= this.start) {
@@ -79,19 +76,14 @@ export default class Timeline {
             }
         }
 
-        let thisActor
-        for (var i in this.actors) {
-            thisActor = this.actors[i]
-
-            for (var j in thisActor.tracks) {
-                thisActor.tracks[j].play(this.frame)
-            }
-
-            thisActor.update()
-        }
-
         if (this.always) {
             this.always.call(this, this.frame)
+        }
+
+        // Pass-through to Actors
+        for (var i in this.actors) {
+            // New Method: Collect
+            this.actors[i].collect(this.frame, frameData, callbackQueue)
         }
     }
 }

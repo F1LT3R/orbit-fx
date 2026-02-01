@@ -139,6 +139,16 @@ graph LR;
 	Track6 --> Key12;
 ```
 
+## Multi-Timeline Interpolation
+
+Orbit-FX supports animating the same property of an actor from multiple timelines simultaneously. When this occurs, the values from all active timelines are averaged (accumulated) to produce the final value.
+
+For example, if Timeline A sets `opacity` to `0` and Timeline B sets `opacity` to `1` at the same frame, the resulting `opacity` will be `0.5`.
+
+This allows for complex layering of effects, where different timelines can contribute to the overall state of an actor without overwriting each other.
+
+Also note: Callbacks are deferred until the end of the frame update, ensuring that when your callback fires, the actor has reached its final, interpolated state for that frame.
+
 ## Animator
 
 The `Animator` is the global controller for a set of timelines, and is instantiated as an `animation`.
